@@ -3,7 +3,7 @@ from unicorn import *
 import ctypes
 import pkg_resources
 import sys
-import distutils
+import sysconfig
 import os
 
 from pathlib import Path
@@ -15,7 +15,7 @@ _lib = {'darwin': 'libunicornafl.dylib',
 _path_list = [Path(pkg_resources.resource_filename(__name__, 'lib')),
               Path(os.path.realpath(__file__)).parent / "lib",
               Path(''),
-              Path(distutils.sysconfig.get_python_lib()),
+              Path(sysconfig.get_path("platlib")),
               Path("/usr/local/lib/" if sys.platform ==
                    'darwin' else '/usr/lib64'),
               Path(os.getenv('PATH', ''))]
